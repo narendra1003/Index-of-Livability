@@ -1,0 +1,261 @@
+// Define the date range
+var startDate = '2024-01-01';
+var endDate = '2024-07-31';
+
+// Define city coordinates and names
+var cities = [
+{name: 'Agartala', coords: [91.2868, 23.8315]},
+{name: 'Agra', coords: [78.0081, 27.1767]},
+{name: 'Ahmedabad', coords: [72.5714, 23.0225]},
+{name: 'Ahmednagar', coords: [74.7496, 19.0952]},
+{name: 'Aizawl', coords: [92.7176, 23.7271]},
+{name: 'Ajmer', coords: [74.6399, 26.4499]},
+{name: 'Akola', coords: [77.0082, 20.7002]},
+{name: 'Alappuzha', coords: [76.3388, 9.4981]},
+{name: 'Aligarh', coords: [78.088, 27.8974]},
+{name: 'Allahabad', coords: [81.8463, 25.4358]},
+{name: 'Ambattur', coords: [80.1615, 13.0982]},
+{name: 'Ambikapur', coords: [83.1954, 23.1189]},
+{name: 'Amravati', coords: [77.7796, 20.9374]},
+{name: 'Amreli', coords: [71.2226, 21.6032]},
+{name: 'Amritsar', coords: [74.8723, 31.634]},
+{name: 'Anand', coords: [72.9289, 22.5645]},
+{name: 'Anantapur', coords: [77.6006, 14.6819]},
+{name: 'Arrah', coords: [84.663, 25.556]},
+{name: 'Asansol', coords: [86.9833, 23.685]},
+{name: 'Aurangabad', coords: [75.3433, 19.8762]},
+{name: 'Avadi', coords: [80.1098, 13.1147]},
+{name: 'Bangalore', coords: [77.5946, 12.9716]},
+{name: 'Bardhaman', coords: [87.8615, 23.2324]},
+{name: 'Bareilly', coords: [79.4304, 28.367]},
+{name: 'Belgaum', coords: [74.4977, 15.8497]},
+{name: 'Bellary', coords: [76.9214, 15.1394]},
+{name: 'Berhampur', coords: [84.7914, 19.3115]},
+{name: 'Bettiah', coords: [84.5032, 26.8024]},
+{name: 'Bhagalpur', coords: [86.9842, 25.2425]},
+{name: 'Bharatpur', coords: [77.501, 27.2152]},
+{name: 'Bhatpara', coords: [88.4085, 22.8717]},
+{name: 'Bhavnagar', coords: [72.1519, 21.7645]},
+{name: 'Bhilai', coords: [81.3509, 21.1938]},
+{name: 'Bhilwara', coords: [74.6333, 25.35]},
+{name: 'Bhiwandi', coords: [73.0483, 19.2813]},
+{name: 'Bhiwani', coords: [76.1333, 28.7997]},
+{name: 'Bhopal', coords: [77.4126, 23.2599]},
+{name: 'Bhubaneswar', coords: [85.8245, 20.2961]},
+{name: 'Bidar', coords: [77.5301, 17.9133]},
+{name: 'Bijapur', coords: [75.71, 16.8302]},
+{name: 'Bikaner', coords: [73.3119, 28.0229]},
+{name: 'Bilaspur', coords: [82.1391, 22.0796]},
+{name: 'Bokaro', coords: [86.1511, 23.6693]},
+{name: 'Bulandshahr', coords: [77.8573, 28.403]},
+{name: 'Burhanpur', coords: [76.2303, 21.3069]},
+{name: 'Chandigarh', coords: [76.7794, 30.7333]},
+{name: 'Chennai', coords: [80.2707, 13.0827]},
+{name: 'Coimbatore', coords: [76.9558, 11.0168]},
+{name: 'Cuttack', coords: [85.8828, 20.4625]},
+{name: 'Darbhanga', coords: [85.8918, 26.1542]},
+{name: 'Davanagere', coords: [75.921, 14.4645]},
+{name: 'Dehradun', coords: [78.0322, 30.3165]},
+{name: 'Delhi', coords: [77.1025, 28.7041]},
+{name: 'Dhanbad', coords: [86.4304, 23.7957]},
+{name: 'Dhule', coords: [74.7749, 20.9042]},
+{name: 'Dibrugarh', coords: [94.911, 27.4728]},
+{name: 'Durgapur', coords: [87.3119, 23.5204]},
+{name: 'Erode', coords: [77.7172, 11.341]},
+{name: 'Faridabad', coords: [77.3178, 28.4089]},
+{name: 'Farrukhabad', coords: [79.5801, 27.3905]},
+{name: 'Firozabad', coords: [78.3958, 27.1591]},
+{name: 'Gandhinagar', coords: [72.6369, 23.2156]},
+{name: 'Gaya', coords: [85.0002, 24.7955]},
+{name: 'Ghaziabad', coords: [77.4538, 28.6692]},
+{name: 'Giridih', coords: [86.3077, 24.1844]},
+{name: 'Gopalpur', coords: [84.9053, 19.2583]},
+{name: 'Gulbarga', coords: [76.8343, 17.3297]},
+{name: 'Guna', coords: [77.311, 24.6476]},
+{name: 'Guntur', coords: [80.4365, 16.3067]},
+{name: 'Gurgaon', coords: [77.0266, 28.4595]},
+{name: 'Guwahati', coords: [91.7362, 26.1445]},
+{name: 'Gwalior', coords: [78.1828, 26.2183]},
+{name: 'Hanumangarh', coords: [74.3294, 29.5818]},
+{name: 'Hapur', coords: [77.7759, 28.7306]},
+{name: 'Hisar', coords: [75.7217, 29.1492]},
+{name: 'Hosur', coords: [77.8253, 12.7401]},
+{name: 'Howrah', coords: [88.2636, 22.5958]},
+{name: 'Hubli-Dharwad', coords: [75.124, 15.3647]},
+{name: 'Hugli', coords: [88.4085, 22.8964]},
+{name: 'Hyderabad', coords: [78.4867, 17.385]},
+{name: 'Ichalkaranji', coords: [74.4605, 16.6912]},
+{name: 'Indore', coords: [75.8577, 22.7196]},
+{name: 'Jabalpur', coords: [79.9864, 23.1815]},
+{name: 'Jaipur', coords: [75.7873, 26.9124]},
+{name: 'Jalandhar', coords: [75.5762, 31.326]},
+{name: 'Jalgaon', coords: [75.5626, 21.0077]},
+{name: 'Jalna', coords: [75.8864, 19.841]},
+{name: 'Jammu', coords: [74.857, 32.7266]},
+{name: 'Jamnagar', coords: [70.0577, 22.4707]},
+{name: 'Jamshedpur', coords: [86.2029, 22.8046]},
+{name: 'Jhansi', coords: [78.5685, 25.4484]},
+{name: 'Jodhpur', coords: [73.0243, 26.2389]},
+{name: 'Kadapa', coords: [78.8242, 14.4673]},
+{name: 'Kakinada', coords: [82.2475, 16.9891]},
+{name: 'Kalyan-Dombivli', coords: [73.1305, 19.2403]},
+{name: 'Kamarhati', coords: [88.3748, 22.6711]},
+{name: 'Kanchipuram', coords: [79.7036, 12.8342]},
+{name: 'Kanpur', coords: [80.3319, 26.4499]},
+{name: 'Karimnagar', coords: [79.1288, 18.4386]},
+{name: 'Karnal', coords: [76.9905, 29.6857]},
+{name: 'Kochi', coords: [76.2673, 9.9312]},
+{name: 'Kolhapur', coords: [74.2433, 16.705]},
+{name: 'Kolkata', coords: [88.3639, 22.5726]},
+{name: 'Kollam', coords: [76.6141, 8.8932]},
+{name: 'Korba', coords: [82.7501, 22.3595]},
+{name: 'Kota', coords: [75.8648, 25.2138]},
+{name: 'Kozhikode', coords: [75.7804, 11.2588]},
+{name: 'Kurnool', coords: [78.0373, 15.8281]},
+{name: 'Latur', coords: [76.5604, 18.4088]},
+{name: 'Loni', coords: [77.288, 28.7515]},
+{name: 'Lucknow', coords: [80.9462, 26.8467]},
+{name: 'Ludhiana', coords: [75.8573, 30.9005]},
+{name: 'Madurai', coords: [78.1198, 9.9252]},
+{name: 'Maheshtala', coords: [88.2532, 22.5086]},
+{name: 'Malappuram', coords: [76.0748, 11.0735]},
+{name: 'Malegaon', coords: [74.5288, 20.5537]},
+{name: 'Mancherial', coords: [79.4287, 18.8708]},
+{name: 'Mandya', coords: [76.8951, 12.5244]},
+{name: 'Mangalore', coords: [74.856, 12.9141]},
+{name: 'Mathura', coords: [77.6737, 27.4924]},
+{name: 'Meerut', coords: [77.7064, 28.9845]},
+{name: 'Mira-Bhayandar', coords: [72.8544, 19.2952]},
+{name: 'Moradabad', coords: [78.7733, 28.8386]},
+{name: 'Mumbai', coords: [72.8777, 19.076]},
+{name: 'Munger', coords: [86.4735, 25.3746]},
+{name: 'Muzaffarnagar', coords: [77.7041, 29.4737]},
+{name: 'Muzaffarpur', coords: [85.3647, 26.1209]},
+{name: 'Mysore', coords: [76.6394, 12.2958]},
+{name: 'Nagpur', coords: [79.0882, 21.1458]},
+{name: 'Naihati', coords: [88.4194, 22.8948]},
+{name: 'Nanded', coords: [77.321, 19.1383]},
+{name: 'Nashik', coords: [73.7898, 19.9975]},
+{name: 'Navi Mumbai', coords: [73.0297, 19.033]},
+{name: 'Navsari', coords: [72.952, 20.9467]},
+{name: 'Nellore', coords: [79.9865, 14.4426]},
+{name: 'Nizamabad', coords: [78.0941, 18.6725]},
+{name: 'Noida', coords: [77.391, 28.5355]},
+{name: 'Ozhukarai', coords: [79.7852, 11.9341]},
+{name: 'Palakkad', coords: [76.6548, 10.7867]},
+{name: 'Pali', coords: [73.3234, 25.7725]},
+{name: 'Panihati', coords: [88.3748, 22.6902]},
+{name: 'Panipat', coords: [76.9635, 29.3909]},
+{name: 'Parbhani', coords: [76.7767, 19.2704]},
+{name: 'Patiala', coords: [76.3869, 30.3398]},
+{name: 'Patna', coords: [85.1376, 25.5941]},
+{name: 'Pimpri-Chinchwad', coords: [73.7997, 18.6298]},
+{name: 'Puducherry', coords: [79.8083, 11.9416]},
+{name: 'Pune', coords: [73.8567, 18.5204]},
+{name: 'Purnia', coords: [87.4753, 25.7771]},
+{name: 'Raichur', coords: [77.3566, 16.2076]},
+{name: 'Raipur', coords: [81.6296, 21.2514]},
+{name: 'Rajahmundry', coords: [81.804, 17.0005]},
+{name: 'Rajkot', coords: [70.8022, 22.3039]},
+{name: 'Rajnandgaon', coords: [81.0299, 21.0974]},
+{name: 'Rampur', coords: [79.025, 28.7895]},
+{name: 'Ranchi', coords: [85.3096, 23.3441]},
+{name: 'Ratlam', coords: [75.037, 23.3342]},
+{name: 'Rayagada', coords: [83.4162, 19.1726]},
+{name: 'Rohtak', coords: [76.6066, 28.8955]},
+{name: 'Roorkee', coords: [77.888, 29.8543]},
+{name: 'Saharanpur', coords: [77.5452, 29.9679]},
+{name: 'Salem', coords: [78.146, 11.6643]},
+{name: 'Sambalpur', coords: [83.9812, 21.4669]},
+{name: 'Sangli', coords: [74.5815, 16.8524]},
+{name: 'Satara', coords: [74.0183, 17.6805]},
+{name: 'Shahjahanpur', coords: [79.9094, 27.8815]},
+{name: 'Shimla', coords: [77.1734, 31.1048]},
+{name: 'Shivamogga', coords: [75.5681, 13.9299]},
+{name: 'Shivpuri', coords: [77.657, 25.4235]},
+{name: 'Sikar', coords: [75.1399, 27.6094]},
+{name: 'Siliguri', coords: [88.3953, 26.7271]},
+{name: 'Singrauli', coords: [82.6754, 24.199]},
+{name: 'Sitapur', coords: [80.6744, 27.5619]},
+{name: 'Solapur', coords: [75.9064, 17.6599]},
+{name: 'South Dumdum', coords: [88.4, 22.61]},
+{name: 'Srinagar', coords: [74.7973, 34.0837]},
+{name: 'Surat', coords: [72.8311, 21.1702]},
+{name: 'Thane', coords: [72.9781, 19.2183]},
+{name: 'Thanjavur', coords: [79.1378, 10.7867]},
+{name: 'Thrissur', coords: [76.2144, 10.5276]},
+{name: 'Tiruchirappalli', coords: [78.7047, 10.7905]},
+{name: 'Tirunelveli', coords: [77.7567, 8.7139]},
+{name: 'Tirupati', coords: [79.4192, 13.6288]},
+{name: 'Tiruppur', coords: [77.3411, 11.1085]},
+{name: 'Tiruvottiyur', coords: [80.3042, 13.1578]},
+{name: 'Tumkur', coords: [77.101, 13.3409]},
+{name: 'Udaipur', coords: [73.7125, 24.5854]},
+{name: 'Ujjain', coords: [75.7849, 23.1793]},
+{name: 'Ulhasnagar', coords: [73.1645, 19.2215]},
+{name: 'Vadodara', coords: [73.1812, 22.3072]},
+{name: 'Varanasi', coords: [82.9739, 25.3176]},
+{name: 'Vasai-Virar', coords: [72.8397, 19.3919]},
+{name: 'Vellore', coords: [79.1325, 12.9165]},
+{name: 'Vijayanagaram', coords: [83.3956, 18.1165]},
+{name: 'Vijayawada', coords: [80.648, 16.5062]},
+{name: 'Viluppuram', coords: [79.4924, 11.9398]},
+{name: 'Visakhapatnam', coords: [83.2185, 17.6868]},
+{name: 'Warangal', coords: [79.5941, 17.9784]},
+];
+
+// Load the MODIS AOD dataset
+var dataset = ee.ImageCollection('MODIS/061/MCD19A2_GRANULES')
+  .filterDate(startDate, endDate)
+  .select(['Optical_Depth_047', 'Optical_Depth_055']);
+
+// Function to get mean AOD from the dataset for a given city
+var getCityAOD = function(city) {
+  var point = ee.Geometry.Point(city.coords);
+  
+  // Filter the dataset for the given city
+  var cityDataset = dataset.filterBounds(point);
+  
+  // Compute mean AOD for the dataset
+  var meanAOD_047 = cityDataset.mean().select('Optical_Depth_047').clip(point.buffer(10000))
+    .reduceRegion({
+      reducer: ee.Reducer.mean(),
+      geometry: point,
+      scale: 1000,
+      bestEffort: true,
+      maxPixels: 1e9
+    }).get('Optical_Depth_047');
+  
+  var meanAOD_055 = cityDataset.mean().select('Optical_Depth_055').clip(point.buffer(10000))
+    .reduceRegion({
+      reducer: ee.Reducer.mean(),
+      geometry: point,
+      scale: 1000,
+      bestEffort: true,
+      maxPixels: 1e9
+    }).get('Optical_Depth_055');
+  
+  // Combine AOD from both bands and compute the average
+  var meanAOD = ee.Number(meanAOD_047).add(ee.Number(meanAOD_055)).divide(2);
+  
+  return ee.Feature(point, {
+    city: city.name,
+    mean_AOD: meanAOD
+  });
+};
+
+// Process each city and create a FeatureCollection
+var cityFeatures = ee.FeatureCollection(cities.map(function(city) {
+  return getCityAOD(city);
+}));
+
+// Print the results
+print('Mean AOD for Cities:', cityFeatures);
+
+// Export the data as a CSV file
+Export.table.toDrive({
+  collection: cityFeatures,
+  description: 'Mean_AOD_Indian_Cities',
+  fileNamePrefix: 'Mean_AOD_Indian_Cities',
+  fileFormat: 'CSV'
+});
