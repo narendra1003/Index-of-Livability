@@ -1,0 +1,32 @@
+#importing libraries
+import numpy as np
+import pandas as pd
+from google.colab import files
+uploaded = files.upload()
+from sklearn.preprocessing import StandardScaler
+from sklearn.impute import SimpleImputer
+
+#Replace '-' with NaN
+df.replace('-', np.nan, inplace=True)
+df = df.infer_objects(copy=False)
+
+
+#Interpolate the data
+df = df.interpolate(method='linear', limit_direction='forward')
+
+
+#Create an imputer to fill missing values with the mean
+imputer = SimpleImputer(strategy='mean')
+
+
+#Fit and transform the imputer on your data
+df_imputed = pd.DataFrame(imputer.fit_transform(df), columns=df.columns)
+
+
+#Save the DataFrame with filled missing values to a CSV file
+df_imputed.to_csv('imputed_data.csv', index=False)
+
+
+#Download the file
+files.download('imputed_data.csv')
+
