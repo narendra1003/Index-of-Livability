@@ -1,0 +1,53 @@
+#This code assumes Ideal Temperature for index creation.
+
+#ideal temperature
+ideal_temperature = 27
+
+#Deviation from the ideal temperature (absolute deviation)
+data['Temperature_Deviation'] = abs(data['Temperature_Celsius'] - ideal_temperature)
+
+#ideal humidity
+ideal_humidity = 70
+
+#Deviation from the ideal humidity (absolute deviation)
+data['Humidity_Deviation'] = abs(data['Humidity'] - ideal_humidity)
+
+'''Deviation from 27°C is bad, penalize cities with higher deviations
+The greater the deviation, the worse the impact on livability
+Invert the deviation so that cities closer to 27°C get a higher score'''
+
+data['Temperature_Adjusted'] = -data['Temperature_Deviation']
+
+weights = {
+    'PM25': 0.22,
+    'NO2_Density': 0.16,
+    'SO2_Density': 0.10,
+    'Ozone_Density': 0.08,
+    'CO_Density': 0.07,
+    'Mean_Methane': 0.04,
+    'Humidity': 0.05,
+    'Soil Moisture': 0.04,
+    'NDVI': 0.06,
+    'Mean_AOD': 0.07,
+    'Temperature_Celsius': 0.06
+}
+
+data['Livability_Score'] = (
+    data['PM25'] * weights['PM25'] +
+    data['NO2_Density'] * weights['NO2_Density'] +
+    data['SO2_Density'] * weights['SO2_Density'] +
+    data['Ozone_Density'] * weights['Ozone_Density'] +
+    data['CO_Density'] * weights['CO_Density'] +
+    data['Mean_Methane'] * weights['Mean_Methane'] +
+    data['Humidity_Adjusted'] * weights['Humidity'] +
+    data['Soil Moisture'] * weights['Soil Moisture'] +
+    data['NDVI'] * weights['NDVI'] +
+    data['Mean_AOD'] * weights['Mean_AOD'] +
+    data['Temperature_Adjusted'] * weights['Temperature_Celsius']
+)
+
+# Sort cities by their updated livability score (higher score = better livability)
+created_index = data[['City', 'Livability_Score']].sort_values(by='Livability_Score', ascending=False)
+
+# Display the top 10 cities with the best livability scores after considering ideal temperature
+created_index.head(10)
