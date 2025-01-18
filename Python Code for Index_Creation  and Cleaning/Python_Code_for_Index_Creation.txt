@@ -1,3 +1,4 @@
+#This code assumes no Ideal Temperature
 
 import pandas as pd
 data = pd.read_csv('Weights_Determinations_.csv')
